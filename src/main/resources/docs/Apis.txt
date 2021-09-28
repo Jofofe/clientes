@@ -1,0 +1,7 @@
+SWAGGER (Após iniciar a aplicação):
+
+http://localhost:8080/api/swagger-ui.html#/
+
+COLEÇÃO POSTMAN:
+
+https://www.getpostman.com/collections/e731312e7107f9be8e50

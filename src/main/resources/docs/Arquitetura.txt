@@ -1,0 +1,20 @@
+Arquitetura Utilizada
+
+Foi utilizado o Spring Boot com suas dependências de data-jpa e web
+
+Seguindo a arquitetura basica Controller - Service - Repository
+
+Na entrada das requisições no backend são utilizadas o Bean Validation
+
+Para todas as excessões criadas do projeto, são utilizadas um handler
+para a resposta da mesma na requisição
+
+Para consultas complexas foi utilizado o padrão Specification, em conjunto com o Repository
+
+Tanto a listagem por paginação, quanto a normal solicitadas no exercicio, foram feitas via PathParameter
+
+Foi utilizado o banco em memoria H2, para assim que iniciar a aplicaçõa, ele esteja disponivel.
+
+O JPA esta configurado como UPDATE
+
+Para testes unitarios foi utilizado JUnit, Mockito, Asserts e MockMvc
