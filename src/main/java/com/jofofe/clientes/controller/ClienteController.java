@@ -56,10 +56,23 @@ public class ClienteController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/{idCliente}")
+    @ApiOperation(value = "Buscar cliente")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Cliente emcontrado com sucesso", response = ClienteDTO.class),
+            @ApiResponse(code = 404, message = "Alguma informação não foi encontrada"),
+            @ApiResponse(code = 400, message = "Ocorreu algum erro negocial"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
+    public ResponseEntity buscarCliente(@PathVariable("idCliente") Integer idCliente) {
+        Cliente cliente = mapper.convert(clienteService.buscarCliente(idCliente), Cliente.class);
+        return ResponseEntity.ok(cliente);
+    }
+
     @GetMapping("/listar-paginado")
     @ApiOperation(value = "Listar clientes paginados")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Clientes paginados listados com sucesso", response = Object.class),
+            @ApiResponse(code = 200, message = "Clientes paginados listados com sucesso", response = Page.class),
             @ApiResponse(code = 404, message = "Alguma informação não foi encontrada"),
             @ApiResponse(code = 400, message = "Ocorreu algum erro negocial"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
@@ -74,7 +87,7 @@ public class ClienteController {
     @GetMapping("/listar")
     @ApiOperation(value = "Listar clientes")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Clientes listados com sucesso", response = Object.class),
+            @ApiResponse(code = 200, message = "Clientes listados com sucesso", response = List.class),
             @ApiResponse(code = 404, message = "Alguma informação não foi encontrada"),
             @ApiResponse(code = 400, message = "Ocorreu algum erro negocial"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),

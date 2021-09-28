@@ -47,6 +47,10 @@ public class ClienteService extends AbstractService<Cliente, Integer, ClienteRep
         }
     }
 
+    public Cliente buscarCliente(Integer idCliente) {
+        return repository.findById(idCliente).orElseThrow(ClienteNaoCadastradoException::new);
+    }
+
     public Page<Object> listarClientesPaginados(Pageable paginacao, String email, String nome, Integer idade) {
         List<Object> clientes = listarClientes(email, nome, idade).stream()
                 .map(c -> mapper.convert(c, ClienteDTO.class)).collect(Collectors.toList());
@@ -57,6 +61,5 @@ public class ClienteService extends AbstractService<Cliente, Integer, ClienteRep
         return repository.findAll(Specification
                 .where(hasEmail(email)).and(hasNome(nome)).and(hasIdade(idade)));
     }
-
 
 }
